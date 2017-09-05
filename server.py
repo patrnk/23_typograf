@@ -13,12 +13,18 @@ class SourceTextForm(FlaskForm):
     source_text = TextAreaField(validators=[validators.required()])
 
 
+class TypographedTextForm(FlaskForm):
+    typographed_text = TextAreaField()
+
+
 @app.route('/', methods=['GET', 'POST'])
 def typograph():
-    form = SourceTextForm(request.form)
-    if form.validate_on_submit():
-        raise ValueError(form.source_text)
-    return render_template('form.html', form=form)
+    context = {}
+    context['input_form'] = SourceTextForm(request.form)
+    context['output_form'] = TypographedTextForm()
+    if context['input_form'].validate_on_submit():
+        context['output_form'].typographed_text = context['input_form'].source_text
+    return render_template('form.html', **context)
 
 
 if __name__ == "__main__":

@@ -33,6 +33,11 @@ class GuillimentsTestCase(unittest.TestCase):
         self.run_test("qwe 'asd? asd!' qwe", expected_output)
         self.run_test('qwe "asd? asd!" qwe', expected_output)
 
+    def test_quotes_between_html_tags(self):
+        expected_output = '<html>«asd»</html>'
+        self.run_test("<html>'asd'</html>", expected_output)
+        self.run_test('<html>"asd"</html>', expected_output)
+
 
 if __name__ == '__main__':
     unittest.main()

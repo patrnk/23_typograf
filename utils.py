@@ -2,9 +2,9 @@ import re
 
 
 def replace_computer_quotation_marks_with_guillemets(text):
-    text = re.sub(r"(?<!\S)'(?=\S)", '«', text)
+    text = re.sub(r"(?<!\w)'(?=\S)", '«', text)
     text = re.sub(r"(?<=\S)'(?!\w)", '»', text)
-    text = re.sub(r'(?<!\S)"(?=\S)', '«', text)
+    text = re.sub(r'(?<!\w)"(?=\S)', '«', text)
     text = re.sub(r'(?<=\S)"(?!\w)', '»', text)
     return text
 

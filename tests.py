@@ -39,5 +39,15 @@ class GuillimentsTestCase(unittest.TestCase):
         self.run_test('<html>"asd"</html>', expected_output)
 
 
+class HTMLTagsTestCase(unittest.TestCase):
+    def run_test(self, test_string):
+        test_output = utils.typograph_text(test_string)
+        self.assertEqual(test_output, test_string)
+
+    def test_quotation_marks(self):
+        test_string = '<html attr="qwe \'asd\' qwe"></ht"m"l>'
+        self.run_test(test_string)
+
+
 if __name__ == '__main__':
     unittest.main()

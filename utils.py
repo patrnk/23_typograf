@@ -27,11 +27,18 @@ def replace_hyphen_with_en_dash(text, additional_filter=''):
     return text
 
 
+def tie_numbers_with_words_by_non_breaking_space(text, additional_filter=''):
+    space = r'{}(?<=\d) (?=\w)'.format(additional_filter)
+    text = re.sub(space, ' ', text)
+    return text
+
+
 def typograph_text(text):
     filters = [
         replace_computer_quotation_marks_with_guillemets,
         replace_hyphen_with_em_dash,
         replace_hyphen_with_en_dash,
+        tie_numbers_with_words_by_non_breaking_space,
     ]
     no_html_regex = r"(?![^<]*\>)"
     for typographer_filter in filters:

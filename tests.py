@@ -79,6 +79,15 @@ class EnDashTestCase(unittest.TestCase):
         self.run_test(test_input=test_string, expected_output=test_string)
 
 
+class NumbersWithWordsTestCase(unittest.TestCase):
+    def run_test(self, test_input, expected_output):
+        test_output = utils.tie_numbers_with_words_by_non_breaking_space(test_input)
+        self.assertEqual(test_output, expected_output)
+
+    def test_number_with_word(self):
+        self.run_test('123 qwe', '123 qwe')
+
+
 class HTMLTagsTestCase(unittest.TestCase):
     def run_test(self, test_input, expected_output):
         test_output = utils.typograph_text(test_input)
@@ -109,6 +118,15 @@ class HTMLTagsTestCase(unittest.TestCase):
     def test_en_dash_beside_tags(self):
         expected_output = '123–456 <html>123–456</html> 123–456'
         test_input = '123-456 <html>123-456</html> 123-456'
+        self.run_test(test_input, expected_output)
+
+    def test_number_with_word_inside_tags(self):
+        test_string = '<html value="123 asd"></123 html>'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+    def test_number_with_word_beside_tags(self):
+        expected_output = '123 asd<html>123 asd</html> 123 asd'
+        test_input = '123 asd<html>123 asd</html> 123 asd'
         self.run_test(test_input, expected_output)
 
 

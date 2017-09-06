@@ -2,8 +2,8 @@ import re
 
 
 def replace_computer_quotation_marks_with_guillemets(text, additional_filter=''):
-    opening_mark_template = r"{}(?<!\w){}(?=\S)"
-    closing_mark_template = r"{}(?<=\S){}(?!\w)"
+    opening_mark_template = r'{}(?<!\w){}(?=\S)'
+    closing_mark_template = r'{}(?<=\S){}(?!\w)'
     opening_single_quotation_mark = opening_mark_template.format(additional_filter, "'")
     closing_single_quotation_mark = closing_mark_template.format(additional_filter, "'")
     opening_double_quotation_mark = opening_mark_template.format(additional_filter, '"')
@@ -16,13 +16,13 @@ def replace_computer_quotation_marks_with_guillemets(text, additional_filter='')
 
 
 def replace_hyphen_with_em_dash(text, additional_filter=''):
-    hyphen = r"{}(?<!\S)-(?!\S)".format(additional_filter)
+    hyphen = r'{}(?<!\S)-(?!\S)'.format(additional_filter)
     text = re.sub(hyphen, '—', text)
     return text
 
 
 def replace_hyphen_with_en_dash(text, additional_filter=''):
-    hyphen = r"{}(?<=\d)-(?=\d)".format(additional_filter)
+    hyphen = r'{}(?<=\d)-(?=\d)'.format(additional_filter)
     text = re.sub(hyphen, '–', text)
     return text
 
@@ -55,7 +55,7 @@ def typograph_text(text):
         tie_short_words_by_non_breaking_space,
         remove_redundant_whitespace,
     ]
-    no_html_regex = r"(?![^<]*\>)"
+    no_html_regex = r'(?![^<]*\>)'
     for typographer_filter in filters:
         text = typographer_filter(text, additional_filter=no_html_regex)
     return text

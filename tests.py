@@ -62,6 +62,23 @@ class EmDashTestCase(unittest.TestCase):
         self.run_test(test_input=test_string, expected_output=test_string)
 
 
+class EnDashTestCase(unittest.TestCase):
+    def run_test(self, test_input, expected_output):
+        test_output = utils.replace_hyphen_with_en_dash(test_input)
+        self.assertEqual(test_output, expected_output)
+
+    def test_en_dash_between_digits(self):
+        self.run_test('123-456', '123–456')
+
+    def test_hyphen_at_the_beginning_of_number(self):
+        test_string = 'qwe -456 qwe'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+    def test_hyphen_at_the_end_of_number(self):
+        test_string = 'qwe -456 qwe'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+
 class HTMLTagsTestCase(unittest.TestCase):
     def run_test(self, test_input, expected_output):
         test_output = utils.typograph_text(test_input)
@@ -83,6 +100,15 @@ class HTMLTagsTestCase(unittest.TestCase):
     def test_em_dash_beside_tags(self):
         expected_output = '— <html>q — a</html> —'
         test_input = '- <html>q - a</html> -'
+        self.run_test(test_input, expected_output)
+
+    def test_en_dash_inside_tags(self):
+        test_string = '<html value="0-1"></html>'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+    def test_en_dash_beside_tags(self):
+        expected_output = '123–456 <html>123–456</html> 123–456'
+        test_input = '123-456 <html>123-456</html> 123-456'
         self.run_test(test_input, expected_output)
 
 

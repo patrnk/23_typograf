@@ -40,13 +40,18 @@ class GuillimentsTestCase(unittest.TestCase):
 
 
 class HTMLTagsTestCase(unittest.TestCase):
-    def run_test(self, test_string):
-        test_output = utils.typograph_text(test_string)
-        self.assertEqual(test_output, test_string)
+    def run_test(self, test_input, expected_output):
+        test_output = utils.typograph_text(test_input)
+        self.assertEqual(test_output, expected_output)
 
-    def test_quotation_marks(self):
+    def test_quotation_marks_inside_tags(self):
         test_string = '<html attr="qwe \'asd\' qwe"></ht"m"l>'
-        self.run_test(test_string)
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+    def test_quotation_marks_beside_tags(self):
+        expected_output = '«asd» <html>«asd»</html> «asd» qwe'
+        test_input = '"asd" <html>"asd"</html> \'asd\' qwe'
+        self.run_test(test_input, expected_output)
 
 
 if __name__ == '__main__':

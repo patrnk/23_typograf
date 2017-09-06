@@ -41,6 +41,7 @@ def tie_short_words_by_non_breaking_space(text, additional_filter=''):
 
 def remove_redundant_whitespace(text, additional_filter=''):
     text = text.strip()
+    text = text.replace('\r', '\n')
     redundant_whitespace = r'{}(\s)\1+'.format(additional_filter)
     text = re.sub(redundant_whitespace, r'\1', text)
     return text

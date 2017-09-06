@@ -130,6 +130,9 @@ class RedundantWhitespace(unittest.TestCase):
     def test_redundant_newlines_at_the_end(self):
         self.run_test('asd\n\n', 'asd')
 
+    def test_redundant_mixed_newlines_in_the_middle(self):
+        self.run_test('asd\n\r\n\r\n\rasd', 'asd\nasd')
+
 
 if __name__ == '__main__':
     unittest.main()

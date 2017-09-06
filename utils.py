@@ -39,6 +39,13 @@ def tie_short_words_by_non_breaking_space(text, additional_filter=''):
     return text
 
 
+def remove_redundant_whitespace(text, additional_filter=''):
+    text = text.strip()
+    redundant_whitespace = r'{}(\s)\1+'.format(additional_filter)
+    text = re.sub(redundant_whitespace, r'\1', text)
+    return text
+
+
 def typograph_text(text):
     filters = [
         replace_computer_quotation_marks_with_guillemets,
@@ -46,6 +53,7 @@ def typograph_text(text):
         replace_hyphen_with_en_dash,
         tie_numbers_with_words_by_non_breaking_space,
         tie_short_words_by_non_breaking_space,
+        remove_redundant_whitespace,
     ]
     no_html_regex = r"(?![^<]*\>)"
     for typographer_filter in filters:

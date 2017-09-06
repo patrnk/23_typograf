@@ -107,6 +107,30 @@ class ShortWordsTestCase(unittest.TestCase):
         self.run_test(test_input=test_string, expected_output=test_string)
 
 
+class RedundantWhitespace(unittest.TestCase):
+    def run_test(self, test_input, expected_output):
+        test_output = utils.remove_redundant_whitespace(test_input)
+        self.assertEqual(test_output, expected_output)
+
+    def test_redundant_spaces_in_the_middle(self):
+        self.run_test('asd    asd', 'asd asd')
+
+    def test_redundant_spaces_at_the_beginning(self):
+        self.run_test('    asd', 'asd')
+
+    def test_redundant_spaces_at_the_end(self):
+        self.run_test('asd   ', 'asd')
+
+    def test_redundant_newlines_in_middle(self):
+        self.run_test('asd\n\n\nasd', 'asd\nasd')
+
+    def test_redundant_newlines_at_the_beginning(self):
+        self.run_test('\n\nasd', 'asd')
+
+    def test_redundant_newlines_at_the_end(self):
+        self.run_test('asd\n\n', 'asd')
+
+
 class HTMLTagsTestCase(unittest.TestCase):
     def run_test(self, test_input, expected_output):
         test_output = utils.typograph_text(test_input)

@@ -15,9 +15,16 @@ def replace_computer_quotation_marks_with_guillemets(text, additional_filter='')
     return text
 
 
+def replace_hyphen_with_em_dash(text, additional_filter=''):
+    hyphen = r"{}(?<!\S)-(?!\S)".format(additional_filter)
+    text = re.sub(hyphen, '—', text)
+    return text
+
+
 def typograph_text(text):
     filters = [
         replace_computer_quotation_marks_with_guillemets,
+        replace_hyphen_with_em_dash,
     ]
     no_html_regex = r"(?![^<]*\>)"
     for typographer_filter in filters:

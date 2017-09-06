@@ -88,6 +88,25 @@ class NumbersWithWordsTestCase(unittest.TestCase):
         self.run_test('123 qwe', '123 qwe')
 
 
+class ShortWordsTestCase(unittest.TestCase):
+    def run_test(self, test_input, expected_output):
+        test_output = utils.tie_short_words_by_non_breaking_space(test_input)
+        self.assertEqual(test_output, expected_output)
+
+    def test_one_letter_word(self):
+        self.run_test('qwe a qwe', 'qwe a qwe')
+
+    def test_two_letter_word(self):
+        self.run_test('qwe as qwe', 'qwe as qwe')
+
+    def test_two_letter_word_at_the_beginning(self):
+        self.run_test('as qwe', 'as qwe')
+
+    def test_long_word(self):
+        test_string = 'qwe asdas qwe'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+
 class HTMLTagsTestCase(unittest.TestCase):
     def run_test(self, test_input, expected_output):
         test_output = utils.typograph_text(test_input)
@@ -127,6 +146,15 @@ class HTMLTagsTestCase(unittest.TestCase):
     def test_number_with_word_beside_tags(self):
         expected_output = '123 asd<html>123 asd</html> 123 asd'
         test_input = '123 asd<html>123 asd</html> 123 asd'
+        self.run_test(test_input, expected_output)
+
+    def test_short_word_inside_tags(self):
+        test_string = '<html value="a asd"></a html>'
+        self.run_test(test_input=test_string, expected_output=test_string)
+
+    def test_short_word_beside_tags(self):
+        expected_output = 'a asd<html>a asd</html>a asd'
+        test_input = 'a asd<html>a asd</html>a asd'
         self.run_test(test_input, expected_output)
 
 

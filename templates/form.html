@@ -28,9 +28,8 @@
 
     <div class="container">
       <form action="" method="POST">
-        {{ input_form.hidden_tag() }}
         <div class="form-group">
-          {{ input_form.source_text(class='form-control', rows='10', placeholder='Введите текст', autofocus=True) }}
+          <textarea name="text" class="form-control" rows="10" placeholder="Введите текст" autofocus>{{ source_text }}</textarea>
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Сделать красиво</button>
@@ -38,7 +37,7 @@
       </form>
       <form onsubmit="return false;">
         <div class="form-group">
-          {{ output_form.typographed_text(class='form-control', rows='10', placeholder='Здесь будет результат', disabled=True)}}
+          <textarea class="form-control" rows="10" placeholder="Здесь будет результат" disabled="disabled">{{ typographed_text }}</textarea>
         </div>
       </form>
     </div><!-- /.container -->
